@@ -41,17 +41,17 @@ const SalesByConsole = () => {
     
     
     console.log(`Sales by console: ${salesByConsole}`)
-    let data = [[...consoles],[...salesByConsole]]
+    let data = [["Platform",...consoles],["Sales",...salesByConsole]]
     console.log(`data: ${data}`)
       
     return (  
         <div>
-            {/* <Chart
+            <Chart
                 chartType = 'ColumnChart'
                 width = "100%"
                 height = "400px"
                 data = {data}
-            /> */}
+            />
         </div> 
     );
 }
