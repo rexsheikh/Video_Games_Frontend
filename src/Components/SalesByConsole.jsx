@@ -40,7 +40,7 @@ const SalesByConsole = () => {
     }
     
     
-    console.log(`Sales by console: ${salesByConsole}`)
+    
     let data = [["Platform",...consoles],["Sales",...salesByConsole]]
     console.log(`data: ${data}`)
       
