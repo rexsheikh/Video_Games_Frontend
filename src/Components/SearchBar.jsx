@@ -2,13 +2,12 @@ import { useState } from "react";
 
 const SearchBar = (props) => {
 
-    const [searchTerm,setSearchTerm] = useState([])
+    const [searchTerm, setSearchTerm] = useState([])
 
     function handleSubmit(event){
         event.preventDefault();
-        props.newSearch(searchTerm)
+        props.getGames(searchTerm)
     };
- 
 
 
     return ( 

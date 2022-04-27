@@ -27,4 +27,4 @@ const GameTable = (props) => {
     );
 }
  
-export default MusicTable;
+export default GameTable;

@@ -1,42 +1,29 @@
 import SalesByConsole from "./Components/SalesByConsole";
-
+import SearchBar from "./Components/SearchBar";
+import DisplayGames from "./Components/DisplayGames"
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 
 const [games,setGames] = useState([]); 
-const [allGames,setAllGames] = useState([]);
 
-useEffect(() => {
-        getAllGames();
-    },[])
-
-
-function newSearch(search){   {/*this takes in the search as a string*/}
-    let newGames = games.filter(function(el){
-    if(el.name.includes(search)){
-        return true;
-      }
-    })
-    setGames(newGames);
+const getGames = async () => {
+  try {
+      let result = await axios.get(
+          `https://localhost:7260/api/gameName/${searchTerm}`
+      );
+      setGames(result.data)
+  } catch (e) {
+      console.log(e.message);
   }
+}
 
-
-  const getAllGames = async() => {
-      try { 
-              let result = await axios.get(
-                  `https://localhost:7260/api/games/names/`
-              )
-          setAllGames(results.data)
-      } catch (e) {
-          console.log(e.message)
-      }
-  }
 
 function App() {
   return (
     <div >
-      <h3> hello world </h3>
+      <SearchBar getGames = {getGames}/>
       <SalesByConsole/>
+      <DisplayGames parentGames = {games}/>
     </div>
   );
 }
