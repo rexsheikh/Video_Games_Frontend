@@ -7,15 +7,21 @@ const SalesByConsole = () => {
     const [consoles,setConsoles] = useState([]);
     const [salesByConsole,setSalesByConsole] = useState([]);
 
+    function buildSalesByConsole(){
+        getConsoles()
+            .then(getSalesByConsole)
+    }
+
+
+
 
     useEffect(() => {
-        getConsoles();
-        getSalesByConsole();
+        buildSalesByConsole();
     },[])
 
-    const getConsoles = async () => {
+    function getConsoles(){
         try {
-            let result = await axios.get(
+            let result = axios.get(
                 "https://localhost:7260/api/games/"
             );
             setConsoles(result.data)
@@ -24,11 +30,11 @@ const SalesByConsole = () => {
         }
     }
 
-    const getSalesByConsole = async() => {
+    function getSalesByConsole() {
         let container = [];
         try { 
             for(let i = 0; i < consoles.length; i++){
-                let result = await axios.get(
+                let result = axios.get(
                     `https://localhost:7260/api/games/${consoles[i]}`
                 )
             container.push(result.data)
@@ -42,7 +48,7 @@ const SalesByConsole = () => {
     
     
     let data = [["Platform",...consoles],["Sales",...salesByConsole]]
-    console.log(`data: ${data}`)
+    console.log(`Data: ${data}`)
       
     return (  
         <div>
