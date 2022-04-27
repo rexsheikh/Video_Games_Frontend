@@ -32,8 +32,6 @@ const SalesByConsole = () => {
         container.push(Array("Platform", "Sales", { role: "style" }))
         for(let[key,value] of Object.entries(obj)){
             container.push(Array(key,value,"blue"))
-            console.log(`${key}: ${value}`)
-            console.log(`container: ${container}`)
     }
     return container
 }
