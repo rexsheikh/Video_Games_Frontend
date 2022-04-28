@@ -1,23 +1,22 @@
 import { Chart } from "react-google-charts"
 const GameTable = (props) => {
-    //on search data should be generated for charts 
-    //
-//     function packageData(obj){
-//         let container = [];
-//         container.push(Array("Platform", "Sales", { role: "style" }))
-//         for(let[key,value] of Object.entries(obj)){
-//             container.push(Array(key,value,"blue"))
-//     }
-//     return container
-// }
 
-    function findMatchesByName(obj){
-        let data;
+    // {
+            //title : [[pc sales],[xbox sales],[playstation]]
+    // }
+
+    //on search => pass in that name, send it to the backend as a parameter. 
+    //backend then searches for matches according to title and returns sales by console.
+
+
+    function matchesToData(obj){
+        let dict = {};
+        let matches;
         for(let i = 0; i < obj.length; i++){
-            data = obj.filter(item => item.name.indexOf(obj[i].name) !== -1);
-            
+            matches = obj.filter(item => item.name.indexOf(obj[i].name) !== -1);
+            dict[obj[i].name] = generateChartData(matches)
         }
-        return Object(data)
+        return dict
     }
 
     function generateChartData(matches){
@@ -29,11 +28,9 @@ const GameTable = (props) => {
         return container
     }
 
-    let example = findMatchesByName(props.parentGames)
-    console.log(`MATCHES: ${JSON.stringify(example)}`)
 
-    let dataExample = generateChartData(example)
-    console.log(`PACKAGED DATA: ${JSON.stringify(dataExample)}`)
+    let dictExample = matchesToData(props.parentGames)
+    console.log(`final dict: ${JSON.stringify(dictExample)}`)
 
     return ( 
     <div>
