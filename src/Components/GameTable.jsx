@@ -58,13 +58,13 @@ const GameTable = (props) => {
                             <td className="text-center"> {game.name} </td>
                             <td className="text-center"> {game.platform} </td>
                             <td className="text-center"> {game.year} </td>
-                            {/* <th className="zoom"><Chart
+                            <td className="zoom"><Chart
                                 chartType = 'ColumnChart'
-                                width = "100%"
-                                height = "100%"
+                                width = "150px"
+                                height = "150px"
                                 data = {dict[game.name]} 
                     />
-                      </th> */}
+                      </td>
                         </tr>
                     )
                 })}
