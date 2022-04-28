@@ -1,26 +1,39 @@
 import { Chart } from "react-google-charts"
 const GameTable = (props) => {
-    // let example = props.parentGames[0].name;
-    // console.log(`EXAMPLE: ${example}`)
-    // // export const data = [
-    // //     ["Element", "Density", { role: "style" }],
-    // //     ["Copper", 8.94, "#b87333"], // RGB value
-    // //     ["Silver", 10.49, "silver"], // English color name
-    // //     ["Gold", 19.3, "gold"],
-    // //     ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
-    // //   ];
+    //on search data should be generated for charts 
+    //
+//     function packageData(obj){
+//         let container = [];
+//         container.push(Array("Platform", "Sales", { role: "style" }))
+//         for(let[key,value] of Object.entries(obj)){
+//             container.push(Array(key,value,"blue"))
+//     }
+//     return container
+// }
 
-    function packageData(obj){
-        let container = [];
-        container.push(Array("Platform", "Sales", { role: "style" }))
+    function findMatchesByName(obj){
+        let data;
         for(let i = 0; i < obj.length; i++){
-            container.push(Array(props.parentGames[i].platform,props.parentGames[i].globalSales,"blue"))
+            data = obj.filter(item => item.name.indexOf(obj[i].name) !== -1);
+            
+        }
+        return Object(data)
+    }
+
+    function generateChartData(matches){
+        let container = [];
+        container.push((Array("Platform", "Sales", { role: "style" })));
+        for(let i = 0; i < matches.length; i++){
+            container.push(Array(matches[i].platform,matches[i].globalSales,"blue"))
         }
         return container
     }
-    
-    let data = packageData(props.parentGames)
-    console.log(`CONTAINER DATA: ${data}`)
+
+    let example = findMatchesByName(props.parentGames)
+    console.log(`MATCHES: ${JSON.stringify(example)}`)
+
+    let dataExample = generateChartData(example)
+    console.log(`PACKAGED DATA: ${JSON.stringify(dataExample)}`)
 
     return ( 
     <div>
@@ -30,6 +43,7 @@ const GameTable = (props) => {
                     <th className="text-center font-weight-bold"> Name</th>
                     <th className="text-center font-weight-bold"> Platform</th>
                     <th className="text-center font-weight-bold"> Year </th>
+                    <th className="text-center font-weight-bold"> Data </th>
                 </tr>
             </thead>
             <tbody>
@@ -43,15 +57,7 @@ const GameTable = (props) => {
                 )
             })}
             </tbody>
-        </table>   
-        <div>
-            <Chart
-                chartType = 'ColumnChart'
-                width = "75%"
-                height = "100px"
-                data = {data}
-            />
-        </div> 
+        </table>
     </div>
     );
 }

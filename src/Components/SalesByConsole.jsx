@@ -4,6 +4,7 @@ import { Chart } from "react-google-charts"
 
 const SalesByConsole = () => {
     const [salesByConsole,setSalesByConsole] = useState([]);
+    const [isLoading,setIsLoading] = useState(true);
     // const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const SalesByConsole = () => {
                 "https://localhost:7260/api/games/"
             );
             setSalesByConsole(result.data)
+            setIsLoading(false)
         } catch (e) {
             console.log(e.message);
         }
@@ -39,17 +41,24 @@ const SalesByConsole = () => {
 let data = packageData(salesByConsole)
 
 
-    
-    return (  
-        <div>
-            <Chart
-                chartType = 'ColumnChart'
-                width = "100%"
-                height = "400px"
-                data = {data}
-            />
-        </div> 
-    );
+    if(isLoading == false){
+        return (  
+            <div>
+                <Chart
+                    chartType = 'ColumnChart'
+                    width = "100%"
+                    height = "400px"
+                    data = {data}
+                />
+            </div> 
+        );
+    }else{
+        return (
+            <h4> LOADING...</h4>
+        )
+            
+        
+    }
 }
- 
+    
 export default SalesByConsole;
