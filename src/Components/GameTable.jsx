@@ -1,13 +1,9 @@
+import { useState } from "react";
 import { Chart } from "react-google-charts"
+import Table from 'react-bootstrap/Table'
+import 'bootstrap/dist/css/bootstrap.css'
+
 const GameTable = (props) => {
-
-    // {
-            //title : [[pc sales],[xbox sales],[playstation]]
-    // }
-
-    //on search => pass in that name, send it to the backend as a parameter. 
-    //backend then searches for matches according to title and returns sales by console.
-
 
     function matchesToData(obj){
         let dict = {};
@@ -28,35 +24,55 @@ const GameTable = (props) => {
         return container
     }
 
+    // let dictExample = matchesToData(props.parentGames)
+    // console.log(`final dict: ${JSON.stringify(dictExample)}`)
+    // console.log(`DICT LOOKUP: ${dictExample[props.parentGames[0].name]}`)
+    // let chartExample = dictExample[props.parentGames[0].name]
 
-    let dictExample = matchesToData(props.parentGames)
-    console.log(`final dict: ${JSON.stringify(dictExample)}`)
 
-    return ( 
-    <div>
-        <table>
-            <thead>
-                <tr> 
-                    <th className="text-center font-weight-bold"> Name</th>
-                    <th className="text-center font-weight-bold"> Platform</th>
-                    <th className="text-center font-weight-bold"> Year </th>
-                    <th className="text-center font-weight-bold"> Data </th>
-                </tr>
-            </thead>
-            <tbody>
-            {props.parentGames.map((game,index) =>{
-                return (
-                    <tr key = {index}> 
-                        <td className="text-center"> {game.name} </td>
-                        <td className="text-center"> {game.platform} </td>
-                        <td className="text-center"> {game.year} </td>
+
+
+    if(props.parentGames.length === 0){
+        return(
+            <div> 
+                <p>Enter a search term....</p>
+            </div>
+        )
+    }else{
+        let dict = matchesToData(props.parentGames)
+        return ( 
+        <div>
+            <table className="table table-dark">
+                <thead>
+                    <tr> 
+                        <th className="text-center font-weight-bold"> Name</th>
+                        <th className="text-center font-weight-bold"> Platform</th>
+                        <th className="text-center font-weight-bold"> Year </th>
+                        <th className="text-center font-weight-bold"> Data </th>
                     </tr>
-                )
-            })}
-            </tbody>
-        </table>
-    </div>
-    );
+                </thead>
+                <tbody>
+                {props.parentGames.map((game,index) =>{
+                    return (
+                        <tr key = {index}> 
+                            <td className="text-center"> {game.name} </td>
+                            <td className="text-center"> {game.platform} </td>
+                            <td className="text-center"> {game.year} </td>
+                            {/* <th className="zoom"><Chart
+                                chartType = 'ColumnChart'
+                                width = "100%"
+                                height = "100%"
+                                data = {dict[game.name]} 
+                    />
+                      </th> */}
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
+        </div>
+        );
+            }
 }
  
 export default GameTable;
