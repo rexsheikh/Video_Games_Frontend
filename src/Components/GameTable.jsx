@@ -1,4 +1,6 @@
-import { Chart } from "react-google-charts"
+import { Chart } from "react-google-charts";
+import './GameTable.css';
+
 const GameTable = (props) => {
     // let example = props.parentGames[0].name;
     // console.log(`EXAMPLE: ${example}`)
@@ -14,22 +16,30 @@ const GameTable = (props) => {
         let container = [];
         container.push(Array("Platform", "Sales", { role: "style" }))
         for(let i = 0; i < obj.length; i++){
-            container.push(Array(props.parentGames[i].platform,props.parentGames[i].globalSales,"blue"))
+            container.push(Array(props.parentGames[i].platform,props.parentGames[i].globalSales,"#483D8B"))
         }
         return container
     }
     
     let data = packageData(props.parentGames)
     console.log(`CONTAINER DATA: ${data}`)
-
+    let options = {
+        backgroundColor: '#B9B2E2'
+    }
     return ( 
     <div>
         <table>
             <thead>
-                <tr> 
+                <tr>
+                    <th className="searchTable">
                     <th className="text-center font-weight-bold"> Name</th>
+                    </th> 
+                    <th className="searchTable">
                     <th className="text-center font-weight-bold"> Platform</th>
+                    </th>
+                    <th className="searchTable">
                     <th className="text-center font-weight-bold"> Year </th>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +60,7 @@ const GameTable = (props) => {
                 width = "75%"
                 height = "100px"
                 data = {data}
+                options = {options}
             />
         </div> 
     </div>

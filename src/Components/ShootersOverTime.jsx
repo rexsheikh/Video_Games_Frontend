@@ -59,7 +59,7 @@ const ShootersOverTime = () => {
         let container = [];
         container.push(Array("Years", "Sales", { role: "style" }))
         for(let[key,value] of Object.entries(obj)){
-            container.push(Array(key,value,"blue"))
+            container.push(Array(key,value,"#483D8B"))
     }
     return container
 }
@@ -91,6 +91,9 @@ let data = packageData(allShooters)
     //     </div> )
     //     };
 
+    let options = {
+        backgroundColor: '#B9B2E2'
+    }
     if(isLoading == false){
         return (  
             <div>
@@ -100,6 +103,7 @@ let data = packageData(allShooters)
                     width = "100%"
                     height = "400px"
                     data = {data}
+                    options = {options}
                 />
             </div> 
         );

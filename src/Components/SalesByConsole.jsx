@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import { Chart } from "react-google-charts"
+import App from "../App.css";
 
 const SalesByConsole = () => {
     const [salesByConsole,setSalesByConsole] = useState([]);
@@ -33,22 +34,28 @@ const SalesByConsole = () => {
         let container = [];
         container.push(Array("Platform", "Sales", { role: "style" }))
         for(let[key,value] of Object.entries(obj)){
-            container.push(Array(key,value,"blue"))
+            container.push(Array(key,value,"#483D8B"))
     }
     return container
 }
 
 let data = packageData(salesByConsole)
+let options = {
+    backgroundColor: '#B9B2E2'
+}
 
 
     if(isLoading == false){
         return (  
             <div>
+                <h3>Video Games Sold Per Console</h3>
                 <Chart
+                    
                     chartType = 'ColumnChart'
                     width = "100%"
                     height = "400px"
                     data = {data}
+                    options = {options}
                 />
             </div> 
         );

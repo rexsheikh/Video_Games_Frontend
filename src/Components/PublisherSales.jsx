@@ -92,6 +92,9 @@ console.log(packageData(publisherSales))
     //     subtitle: "Sales, Publishers, & Consoles",
     //     },
     //   };
+    let options = {
+        backgroundColor: '#B9B2E2'
+    }
 
     if(isLoading == false){
     return ( 
@@ -101,7 +104,7 @@ console.log(packageData(publisherSales))
             width= "100%"
             height="400px"
             data= {data}
-            // options = {options}
+            options = {options}
             />
         </div>
      );

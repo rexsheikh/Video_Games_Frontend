@@ -1,0 +1,21 @@
+.myButton {
+    color: rgb(255, 255, 255); 
+    font-size: 12px; 
+    line-height: 12px; 
+    padding: 4px; 
+    border-radius: 10px; 
+    font-family: “Lucida Sans Unicode”, “Lucida Grande”, sans-serif; 
+    background-image: linear-gradient(to right, rgb(101, 28, 164) 10%, rgb(195, 13, 231) 50%, rgb(60, 28, 164) 100%);
+    border: 2px double linear-gradient(to right, rgb(101, 28, 164) 10%, rgb(195, 13, 231) 50%, rgb(60, 28, 164) 100%); 
+    display: inline-block;
+}
+    .myButton:hover {
+    background: #ba6deb; 
+}
+    .myButton:active {
+    background: #144E75; 
+}
+.search{
+    border: 5px double rgb(1, 67, 111);
+    border-radius: 10px;
+}

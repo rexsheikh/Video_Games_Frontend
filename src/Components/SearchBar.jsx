@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 import GameTable from "./GameTable"
+import "./SearchBar.css"
+import App from "../App.css";
 
 
 const SearchBar = (props) => {
@@ -34,11 +36,13 @@ const SearchBar = (props) => {
       }
     
     return ( 
-        <div>
+        <div >
+            <div className="topBackground">
             <form onSubmit={handleSubmit}>
-                <input type = "text" placeholder="Search..." value = {searchTerm} onChange = {(event) => setSearchTerm(event.target.value)}></input> 
-                <button type = "submit"> Submit </button>
+                <input className="search" type = "text" placeholder="Search..." value = {searchTerm} onChange = {(event) => setSearchTerm(event.target.value)}></input> 
+                <button className="myButton" type = "submit"> Submit </button>
             </form>
+            </div>
             <GameTable parentGames = {games}/>
         </div>
      );

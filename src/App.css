@@ -1,0 +1,21 @@
+.border{
+    border: 5px ridge rgb(57, 13, 178);
+    border-radius: 10px;
+}
+
+.topBackground{
+    padding: .8%;
+    background: #D0E4F5 
+    url("Assets/blue-lights.jpg");
+    background-size: 50%;
+    background-position: center right;
+    
+}
+
+.allBackground{
+    background-color: #B9B2E2;
+}
+
+.font{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
