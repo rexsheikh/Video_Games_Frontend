@@ -1,78 +1,59 @@
-import { useState } from "react";
 import { Chart } from "react-google-charts"
-import Table from 'react-bootstrap/Table'
-import 'bootstrap/dist/css/bootstrap.css'
-
 const GameTable = (props) => {
+    // let example = props.parentGames[0].name;
+    // console.log(`EXAMPLE: ${example}`)
+    // // export const data = [
+    // //     ["Element", "Density", { role: "style" }],
+    // //     ["Copper", 8.94, "#b87333"], // RGB value
+    // //     ["Silver", 10.49, "silver"], // English color name
+    // //     ["Gold", 19.3, "gold"],
+    // //     ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
+    // //   ];
 
-    function matchesToData(obj){
-        let dict = {};
-        let matches;
-        for(let i = 0; i < obj.length; i++){
-            matches = obj.filter(item => item.name.indexOf(obj[i].name) !== -1);
-            dict[obj[i].name] = generateChartData(matches)
-        }
-        return dict
-    }
-
-    function generateChartData(matches){
+    function packageData(obj){
         let container = [];
-        container.push((Array("Platform", "Sales", { role: "style" })));
-        for(let i = 0; i < matches.length; i++){
-            container.push(Array(matches[i].platform,matches[i].globalSales,"blue"))
+        container.push(Array("Platform", "Sales", { role: "style" }))
+        for(let i = 0; i < obj.length; i++){
+            container.push(Array(props.parentGames[i].platform,props.parentGames[i].globalSales,"blue"))
         }
         return container
     }
+    
+    let data = packageData(props.parentGames)
+    console.log(`CONTAINER DATA: ${data}`)
 
-    // let dictExample = matchesToData(props.parentGames)
-    // console.log(`final dict: ${JSON.stringify(dictExample)}`)
-    // console.log(`DICT LOOKUP: ${dictExample[props.parentGames[0].name]}`)
-    // let chartExample = dictExample[props.parentGames[0].name]
-
-
-
-
-    if(props.parentGames.length === 0){
-        return(
-            <div> 
-                <p>Enter a search term....</p>
-            </div>
-        )
-    }else{
-        let dict = matchesToData(props.parentGames)
-        return ( 
-        <div>
-            <table className="table table-dark">
-                <thead>
-                    <tr> 
-                        <th className="text-center font-weight-bold"> Name</th>
-                        <th className="text-center font-weight-bold"> Platform</th>
-                        <th className="text-center font-weight-bold"> Year </th>
-                        <th className="text-center font-weight-bold"> Data </th>
+    return ( 
+    <div>
+        <table>
+            <thead>
+                <tr> 
+                    <th className="text-center font-weight-bold"> Name</th>
+                    <th className="text-center font-weight-bold"> Platform</th>
+                    <th className="text-center font-weight-bold"> Year </th>
+                </tr>
+            </thead>
+            <tbody>
+            {props.parentGames.map((game,index) =>{
+                return (
+                    <tr key = {index}> 
+                        <td className="text-center"> {game.name} </td>
+                        <td className="text-center"> {game.platform} </td>
+                        <td className="text-center"> {game.year} </td>
                     </tr>
-                </thead>
-                <tbody>
-                {props.parentGames.map((game,index) =>{
-                    return (
-                        <tr key = {index}> 
-                            <td className="text-center"> {game.name} </td>
-                            <td className="text-center"> {game.platform} </td>
-                            <td className="text-center"> {game.year} </td>
-                            <td className="zoom"><Chart
-                                chartType = 'ColumnChart'
-                                width = "150px"
-                                height = "150px"
-                                data = {dict[game.name]} 
-                    />
-                      </td>
-                        </tr>
-                    )
-                })}
-                </tbody>
-            </table>
-        </div>
-        );
-            }
+                )
+            })}
+            </tbody>
+        </table>   
+        <div>
+            <Chart
+                chartType = 'ColumnChart'
+                width = "75%"
+                height = "100px"
+                data = {data}
+            />
+        </div> 
+    </div>
+    );
 }
  
 export default GameTable;
