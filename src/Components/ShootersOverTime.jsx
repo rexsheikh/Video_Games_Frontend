@@ -13,11 +13,13 @@ import { Chart } from "react-google-charts"
 const ShootersOverTime = () => {
     const [allShooters,setAllShooters] = useState([]);
     const[allRPGs, setAllRPGs] = useState([]);
+    const[allRacing,setAllRacing] = useState([]);
     const [isLoading,setIsLoading] = useState(0);
 
     useEffect(() => {
         getAllShooters();
         getAllRPGs();
+        getAllRacing();
     },[])
 
 
@@ -41,13 +43,23 @@ const ShootersOverTime = () => {
             console.log(e.message);
         }
     }
+    const getAllRacing = async () => {
+        try {
+            let result = await axios.get(
+                "https://localhost:7260/api/games/racingByYear"
+            );
+            setAllRacing(result.data)
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
 
 
 
 
     function packageData(obj){
         let container = [];
-        container.push(Array("Years", "Shooters","RPGs"))
+        container.push(Array("Years", "Shooters","RPGs","Racing"))
         for(let[key,value] of Object.entries(obj)){
             container.push(Array(key,value))
     }
@@ -64,11 +76,9 @@ function insertData(packagedData,newData){
 
 
 let data = packageData(allShooters)
-let finalData = insertData(data,allRPGs)
+let rpgData = insertData(data,allRPGs)
+let finalData = insertData(rpgData,allRacing)
 
-// let finalData = insertData(packagedData,allRPGs)
-// console.log(`final data: ${finalData}`)
-// console.log(`rpg values: ${Object.values(allRPGs)}`)
 let options = {
     backgroundColor: '#B9B2E2',
     title: "Genre Sales by Year",
