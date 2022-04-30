@@ -17,47 +17,45 @@ const GameTable = (props) => {
 
     function generateChartData(matches){
         let container = [];
-        container.push((Array("Platform", "Sales", { role: "style" })));
+        container.push((Array("Platform", "Sales (millions of copies)", { role: "style" })));
         for(let i = 0; i < matches.length; i++){
-            container.push(Array(matches[i].platform,matches[i].globalSales,"blue"))
+            container.push(Array(matches[i].platform,matches[i].globalSales,"483D8B"))
         }
         return container
     }
 
-
-
-
     if(props.parentGames.length === 0){
         return(
             <div> 
-                <p>Enter a search term....</p>
             </div>
         )
     }else{
         let dict = matchesToData(props.parentGames)
         return ( 
         <div>
-            <table className="table table-dark">
+            <table className="table table-bordered table-hover">
                 <thead>
-                    <tr> 
-                        <th className="text-center font-weight-bold"> Name</th>
-                        <th className="text-center font-weight-bold"> Platform</th>
-                        <th className="text-center font-weight-bold"> Sales per Console </th>
+                    <tr className="text-align:center"> 
+                        <th className="text-center font-weight-bold"> Sales Data </th>
                     </tr>
                 </thead>
                 <tbody>
                 {props.parentGames.map((game,index) =>{
                     return (
                         <tr key = {index}> 
-                            <td className="text-center"> {game.name} </td>
-                            <td className="text-center"> {game.platform} </td>
-                            <th className="zoom"><Chart
+                            <td><Chart
                                 chartType = 'ColumnChart'
                                 width = "100%"
                                 height = "100%"
                                 data = {dict[game.name]} 
-                    />
-                      </th>
+                                let options = {{
+                                    backgroundColor: '#B9B2E2',
+                                    title: `${game.name}/${game.year}/${game.genre}`,
+                                    subtitle: game.year,
+                                    legend: {position: "bottom"}
+                                }}
+                                 />
+                             </td>
                         </tr>
                     )
                 })}
