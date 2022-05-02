@@ -50,8 +50,8 @@ const GameTable = (props) => {
                                 data = {dict[game.name]} 
                                 let options = {{
                                     backgroundColor: '#B9B2E2',
-                                    title: `${game.name}/${game.year}/${game.genre}`,
-                                    subtitle: game.year,
+                                    title: `${game.name} | YEAR: ${game.year} | GENRE: ${game.genre} | PUBLISHER: ${game.publisher}`,
+                                    subtitle: "Test",
                                     legend: {position: "bottom"}
                                 }}
                                  />

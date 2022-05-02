@@ -22,7 +22,7 @@ function App() {
       <ShootersOverTime />
       </div>
       <div className="border">
-      <PublisherSales/>
+      {/* <PublisherSales/> */}
       </div>
     </div>
     </div>
